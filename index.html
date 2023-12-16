@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Beau+Rivage&family=Bebas+Neue&family=Great+Vibes&family=Merienda:wght@400;600;800&family=Saira+Condensed:wght@100;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <title>Document</title>
+
+    <style>
+      body {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        max-width: 90%;
+        background-color: #f0f0f0;
+        background-image: url("https://media1.tenor.com/m/bsrq-Il937oAAAAd/tree-winter.gif");
+        background-size: cover;
+        font-family: Arial, Helvetica, sans-serif;
+        background-position: center center;
+        overflow: auto;
+      }
+
+      .container {
+        background-color: #ffffff;
+        width: 50rem;
+        max-width: 80vw;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 10px;
+        border: 3px solid rgb(226, 220, 209);
+        box-shadow: 10px 5px 5px rgb(0, 0, 0);
+        border-radius: 8px;
+        opacity: 0.8;
+      }
+
+      .column {
+        width: 49%; /* Adjust the width of each column as needed */
+        box-sizing: border-box;
+      }
+
+      .inner-container {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 3px solid #000000;
+        border-radius: 8px;
+      }
+
+      .row {
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .inner-container-main {
+        padding: 75px 10px;
+        padding-bottom: 20px;
+        border: 2px solid #f0f0f0;
+        box-shadow: 10px 5px 5px rgb(187, 184, 184);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+      }
+
+      .inner-container-main h2 {
+        font-family: "Bebas Neue", sans-serif;
+        margin: 0 auto;
+        letter-spacing: 1px;
+        font-size: 3.5vw;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        color: #404219;
+      }
+
+      .temp {
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        box-sizing: border-box;
+      }
+
+      .inner-container-main p {
+        font-family: "Saira Condensed", sans-serif;
+        font-weight: bold;
+        font-size: 2vh;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+      }
+
+      .inner-container-current {
+        padding: 10px 5px;
+        border: 2px solid #f0f0f0;
+        box-shadow: 10px 5px 5px rgb(187, 184, 184);
+        border-radius: 8px;
+        margin-bottom: 20px;
+        background-size: contain;
+        text-align: center;
+      }
+
+      .animated-icon img {
+        width: 80px;
+      }
+
+      .inner-container-forecast {
+        border: 2px solid #f0f0f0;
+        box-shadow: 10px 5px 5px rgb(187, 184, 184);
+        border-radius: 8px;
+        padding: 20px 15px;
+        margin-bottom: 15px;
+      }
+
+      .inner-container-forecast h2 {
+        margin: 0 auto;
+        text-align: center;
+        color: #404219;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        list-style-type: none;
+      }
+
+      ul li {
+        display: flex;
+        justify-content: space-around;
+        padding: 5px;
+        font-size: 1.1vw;
+        align-items: center;
+      }
+
+      li:hover {
+        background-color: #41441a;
+        border-radius: 4px;
+        color: white;
+      }
+
+      .inner-container-quote {
+        border: 2px solid #f0f0f0;
+        box-shadow: 10px 5px 5px rgb(187, 184, 184);
+        border-radius: 8px;
+        padding: 22px 5px;
+        background-image: url("https://media3.giphy.com/media/bGNunPOXm57a1Ed5aS/giphy.gif?cid=ecf05e47r2k4nqjsrd1coo6s4og1213c48lduyebby0u96wd&ep=v1_gifs_search&rid=giphy.gif&ct=g");
+        background-position: right center;
+        background-size: cover;
+        text-align: center;
+        font-family: "Saira Condensed";
+      }
+
+      .quote {
+        font-family: Merienda;
+        font-weight: 900;
+        margin: 0;
+      }
+
+      .city,
+      .temp {
+        text-align: center;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+      }
+
+      .search-input {
+        background-color: #f0f0f0;
+        color: rgba(39, 33, 66, 0.4);
+        font-size: 14px;
+        padding: 8px;
+        width: 60%;
+        border-radius: 8px;
+        border: none;
+      }
+
+      .search-button {
+        font-size: 14px;
+        background-color: #f0f0f0;
+        color: rgb(0, 0, 0);
+        padding: 8px;
+        border-radius: 8px;
+        border: none;
+      }
+
+      .weather-icon {
+        text-align: center;
+        font-size: 2.5vw;
+      }
+
+      #changeButton {
+        text-align: center;
+        margin: 10px auto;
+        border-radius: 40%;
+        cursor: pointer;
+        font-size: 10px;
+        border: none;
+      }
+
+      footer {
+        font-size: 12px;
+        text-align: center;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="quote-inner-container">
+          <button id="changeButton">
+            <p>Change Theme</p>
+          </button>
+          <form id="search-bar">
+            <input
+              type="text"
+              placeholder="Enter current Location"
+              class="search-input"
+              id="search-input"
+            />
+            <input type="submit" value="Search" class="search-button" />
+          </form>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="inner-container-main">
+          <h2 class="city" id="current-city">Portland</h2>
+          <h3 class="temp" id="current-temp">50°F | 10°C</h3>
+          <p class="date" id="current-details">Wednesday, November 15, 2023</p>
+          <p class="time" id="current-time">12:18</p>
+        </div>
+
+        <div class="inner-container-current">
+          <h2 class="weather-icon" id="current-condition">
+            Cloudy
+            <span class="animated-icon" id="current-icon">
+              <img src="/week2/project-plus/imgs/clouds.gif" width="60" alt=>
+            </span>
+          </h2>
+          <p class="humidity">💧Humidity: <span class="value">81%</span></p>
+          <p class="wind">💨Wind: <span class="value">2km/h</span></p>
+          <p class="last-updated">
+            Last Updated:
+            <span class="value"> 2:10pm </span>
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="inner-container-forecast">
+          <h2>Weather Forecast</h2>
+          <hr />
+          <ul>
+            <li>
+              <div class="day-of-the-week">Thursday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/—Pngtree—cloud icon_4468411.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+
+            <li>
+              <div class="day-of-the-week">Friday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/rain_5392059.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+
+            <li>
+              <div class="day-of-the-week">Saturday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/rain_5392059.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+
+            <li>
+              <div class="day-of-the-week">Sunday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/storm_3352213.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+
+            <li>
+              <div class="day-of-the-week">Monday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/cloudy_4637635.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+
+            <li>
+              <div class="day-of-the-week">Tuesday</div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/—Pngtree—cloud icon_4468411.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+            </li>
+          </ul>
+          <hr />
+        </div>
+
+        <div class="inner-container-quote">
+          <p>
+            Quote of the Day:
+            <span class="quote" id="quote-container"
+              >"You have brains in your head. You have feet in your shoes. You
+              can steer yourself in any direction you choose."
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          This project was coded by
+          <a href="#" target="_blank">Karine Magalhaes Heidgerken</a> and is
+          <a href="#" target="_blank"> on GitHub</a> and
+          <a href="#" target="_blank">hosted on Netlify</a>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the button and body elements
+        let changeButton = document.querySelector("#changeButton");
+        let body = document.querySelector("body");
+
+        // Set the new background image when the button is clicked
+        changeButton.addEventListener("click", function () {
+          body.style.backgroundImage = 'url("https://i.gifer.com/IrS.gif")';
+          // Replace 'new-background.jpg' with the path to your desired image
+        });
+      });
+
+      //// Set the current day of the week. month, date  and year///
+      let now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      let year = now.getFullYear();
+      let date = now.getDate();
+
+      let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      let day = days[now.getDay()];
+
+      let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+
+      let month = months[now.getMonth()];
+
+      let currentDetails = document.querySelector("#current-details");
+      currentDetails.innerHTML = `${day}, ${month} ${date}, ${year}`;
+
+      let currentTime = document.querySelector("#current-time");
+      currentTime.innerHTML = `${hours}:${minutes}`;
+
+      //Get input result and show temperature in celsius and fahrenheit.
+
+      function search(event) {
+        event.preventDefault();
+        let searchInput = document.querySelector("#search-input");
+        let cityElement = document.querySelector("#current-city");
+        cityElement.innerHTML = searchInput.value;
+
+        let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
+        let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=metric`;
+        let h1 = axios.get(apiUrl).then(displayTemp);
+      }
+      let searchBar = document.querySelector("#search-bar");
+      searchBar.addEventListener("submit", search);
+
+      function displayTemp(response) {
+        let temperature = Math.round(response.data.temperature.current);
+        let city = response.data.city;
+        let fahrenheit = (temperature * 9) / 5 + 32;
+        let condition = response.data.condition.description.toUpperCase();
+
+        let temp = document.querySelector("#current-temp");
+        temp.innerHTML = `${temperature}°C | ${fahrenheit}°`;
+
+        let currentCondition = document.querySelector("#current-condition");
+        currentCondition.innerHTML = `${condition}`;
+      }
+
+      //create quotes function
+
+      function ShowQuotes() {
+        let quote = [
+          "It is often the small steps, not the giant leaps, that bring about the most lasting change.",
+          "There is always light. If only we are brave enough to see it. If only we are brave enough to be it.",
+          "You have brains in your head. You have feet in your shoes. You can steer yourself in any direction you choose.",
+          "I scorched the earth with my talent and I let my light shine.",
+          "You can't rely on how you look to sustain you, what sustains us, what is fundamentally beautiful is compassion; for yourself and your those around you.",
+          "All our dreams can come true — if we have the courage to pursue them.",
+          "Don't sit down and wait for the opportunities to come. Get up and make them.",
+          "The people who are crazy enough to think they can change the world are the ones who do.",
+        ];
+        let Pick = Math.floor(Math.random() * quote.length);
+        let quoteContainer = document.querySelector("#quote-container");
+        quoteContainer.innerHTML = quote[Pick];
+      }
+
+      document.addEventListener("DOMContentLoaded", ShowQuotes());
+    </script>
+  </body>
+</html>
