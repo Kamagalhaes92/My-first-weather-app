@@ -11,21 +11,23 @@
     />
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-    <title>My weather app</title>
+    <title>My Weather App</title>
   </head>
   <body>
     <div class="container">
-      <div class="row">
+      <div class="theme-button">
         <div class="quote-inner-container">
           <button id="changeButton">
             <p>Change Theme</p>
           </button>
+
           <form id="search-bar">
             <input
               type="text"
               placeholder="Enter current Location"
               class="search-input"
               id="search-input"
+              required
             />
             <input type="submit" value="Search" class="search-button" />
           </form>
@@ -152,7 +154,7 @@
             href="https://github.com/Kamagalhaes92/My-first-weather-app"
             target="_blank"
           >
-            on GitHub</a
+            open-sourced on GitHub</a
           >
           and
           <a href="https://meek-cat-075484.netlify.app/" target="_blank"
