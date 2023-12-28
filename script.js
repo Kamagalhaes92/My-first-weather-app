@@ -1,14 +1,29 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Get the button and body elements
-  let changeButton = document.querySelector("#changeButton");
-  let body = document.querySelector("body");
+// Array of background images
+const backgroundImages = [
+  'url("https://i.pinimg.com/originals/9f/72/a4/9f72a4881c7f3791da3dadf12e218efb.gif")',
+  'url("https://i.pinimg.com/originals/39/d0/37/39d03736f00003372171cb7e3bdcad7e.gif")',
+  `url("https://cdn.wallpapersafari.com/71/1/BmFHIG.gif")`,
+  `url("https://i.pinimg.com/originals/bb/33/98/bb33987c254c892ba6ab782efbd36c2f.gif")`,
+  `url("https://static.wixstatic.com/media/8d5a16_86f4cc2979094100946ebcf921a5cbd6~mv2.gif")`,
+  `url("https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif")`,
+  'url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg")',
+  // Add more image paths as needed
+];
 
-  // Set the new background image when the button is clicked
-  changeButton.addEventListener("click", function () {
-    body.style.backgroundImage = 'url("https://i.gifer.com/IrS.gif")';
-    // Replace 'new-background.jpg' with the path to your desired image
-  });
-});
+let currentIndex = 0;
+
+// Function to change the background image
+function changeBackground() {
+  document.body.style.backgroundImage = backgroundImages[currentIndex];
+
+  // Increment the index or reset to 0 when reaching the end
+  currentIndex = (currentIndex + 1) % backgroundImages.length;
+}
+
+// Event listener for the "Change Theme" button
+document
+  .getElementById("changeButton")
+  .addEventListener("click", changeBackground);
 
 //// Set the current day of the week. month, date  and year///
 let now = new Date();
@@ -113,3 +128,5 @@ function ShowQuotes() {
 }
 
 document.addEventListener("DOMContentLoaded", ShowQuotes());
+
+let forecast = document.querySelector("#forecats");
