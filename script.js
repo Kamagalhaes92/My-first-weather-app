@@ -52,12 +52,13 @@ let months = [
 ];
 
 let month = months[now.getMonth()];
-
 let currentDetails = document.querySelector("#current-details");
-currentDetails.innerHTML = `${day}, ${month} ${date}, ${year}`;
-
 let currentTime = document.querySelector("#current-time");
+let lastUpdated = document.querySelector("#last-updated");
+
+currentDetails.innerHTML = `${day}, ${month} ${date}, ${year}`;
 currentTime.innerHTML = `${hours}:${minutes}`;
+lastUpdated.innerHTML = `${hours}:${minutes}`;
 
 //Get input result and show temperature in celsius and fahrenheit.
 
@@ -65,6 +66,7 @@ function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-input");
   let cityElement = document.querySelector("#current-city");
+
   cityElement.innerHTML = searchInput.value;
 
   let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
@@ -72,19 +74,24 @@ function search(event) {
   let h1 = axios.get(apiUrl).then(displayTemp);
 }
 let searchBar = document.querySelector("#search-bar");
+
 searchBar.addEventListener("submit", search);
 
 function displayTemp(response) {
   let temperature = Math.round(response.data.temperature.current);
-  let city = response.data.city;
   let fahrenheit = (temperature * 9) / 5 + 32;
-  let condition = response.data.condition.description.toUpperCase();
-
+  let condition = response.data.condition.description;
   let temp = document.querySelector("#current-temp");
-  temp.innerHTML = `${temperature}°C | ${fahrenheit}°`;
-
   let currentCondition = document.querySelector("#current-condition");
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeed = document.querySelector("#wind-speed");
+  let iconElement = document.querySelector("#current-icon");
+
+  temp.innerHTML = `${temperature}°C | ${fahrenheit}°`;
   currentCondition.innerHTML = `${condition}`;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+  windSpeed.innerHTML = `${response.data.wind.speed}km/h`;
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" width="60" alt= />`;
 }
 
 //create quotes function
