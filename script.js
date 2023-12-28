@@ -109,7 +109,7 @@ function ShowQuotes() {
   ];
   let Pick = Math.floor(Math.random() * quote.length);
   let quoteContainer = document.querySelector("#quote-container");
-  quoteContainer.innerHTML = quote[Pick];
+  quoteContainer.innerHTML = `"${quote[Pick]}"`;
 }
 
 document.addEventListener("DOMContentLoaded", ShowQuotes());
