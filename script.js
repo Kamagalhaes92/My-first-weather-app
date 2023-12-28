@@ -87,7 +87,7 @@ function displayTemp(response) {
   let windSpeed = document.querySelector("#wind-speed");
   let iconElement = document.querySelector("#current-icon");
 
-  temp.innerHTML = `${temperature}°C | ${fahrenheit}°`;
+  temp.innerHTML = `${temperature}°C | ${fahrenheit}°F`;
   currentCondition.innerHTML = `${condition}`;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeed.innerHTML = `${response.data.wind.speed}km/h`;
