@@ -34,7 +34,7 @@ body {
 }
 
 .column {
-  width: 49%; /* Adjust the width of each column as needed */
+  width: 48%; /* Adjust the width of each column as needed */
   box-sizing: border-box;
 }
 
