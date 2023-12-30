@@ -103,8 +103,10 @@ function displayTemp(response) {
   let searchInput = document.querySelector("#search-input");
   let cityElement = document.querySelector("#current-city");
 
+  getForecast(response.data.city);
+
   cityElement.innerHTML = response.data.city;
-  temp.innerHTML = `${temperature}°C | ${fahrenheit}°F`;
+  temp.innerHTML = `${temperature}°C | ${Math.round(fahrenheit)}°F`;
   currentCondition.innerHTML = `${condition}`;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeed.innerHTML = `${response.data.wind.speed}km/h`;
@@ -131,32 +133,47 @@ function ShowQuotes() {
 
 document.addEventListener("DOMContentLoaded", ShowQuotes());
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
 function getForecast(city) {
   let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
   console.log(apiUrl);
 }
 
-function displayForecast() {
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+function displayForecast(response) {
+  console.log(response.data);
+
   let forecastHtml = "";
 
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHtml =
+        forecastHtml +
+        `
        <li>
-              <div class="day-of-the-week">${day} </div>
+              <div class="day-of-the-week">${formatDay(day.time)}</div>
               <div class="forecast-icons">
                 <img
-                  src="/week2/project-plus/imgs/—Pngtree—cloud icon_4468411.png"
-                  width="42"
+                  src="${day.condition.icon_url}"
                 />
               </div>
-              <span class="min-max-temp"> 11ºC 2ºC </span>
+              <span class="max-temp"> ${Math.round(
+                day.temperature.maximum
+              )}°C </span>
+              <span class="min-temp">  ${Math.round(
+                day.temperature.minimum
+              )}°C </span>
       </li>
 
     `;
+    }
   });
 
   let forecastElement = document.querySelector("#forecast");
@@ -167,5 +184,5 @@ let searchFormElement = document.querySelector("#search-bar");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCity("Portland");
-getForecast("Portland");
+
 displayForecast();
