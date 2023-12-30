@@ -7,22 +7,14 @@ body {
   max-width: 90%;
   background-color: #f0f0f0;
   background-image: url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg");
-
-  /* https://stormandsky.com/gif/14.gif*/
-  /* https://cdn.wallpapersafari.com/71/1/BmFHIG.gif*/
-  /*https://i.pinimg.com/originals/02/56/5c/02565c33131c9e8a241dd5ae4d97e81e.gif*/
-
   background-size: cover;
   font-family: Arial, Helvetica, sans-serif;
   background-position: center center;
-  overflow: auto;
 }
 
 .container {
   background-color: #ffffff;
-  width: 50rem;
-  max-width: 85vw;
-  max-height: 90vh;
+  max-width: 650px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -30,7 +22,7 @@ body {
   border: 3px solid rgb(180, 179, 177);
   box-shadow: 10px 5px 5px rgb(0, 0, 0);
   border-radius: 8px;
-  opacity: 0.9;
+  opacity: 0.78;
 }
 
 .column {
@@ -56,7 +48,7 @@ body {
   padding: 75px 10px;
   padding-bottom: 20px;
   border: 2px solid #f0f0f0;
-  box-shadow: 10px 5px 5px rgb(187, 184, 184);
+  box-shadow: 10px 5px 5px rgb(153, 151, 151);
   border-radius: 8px;
   margin-bottom: 15px;
   box-sizing: border-box;
@@ -66,7 +58,7 @@ body {
   font-family: "Bebas Neue", sans-serif;
   margin: 0 auto;
   letter-spacing: 1px;
-  font-size: 2.5rem;
+  font-size: 2rem;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -92,7 +84,7 @@ body {
 .inner-container-current {
   padding: 10px 5px;
   border: 2px solid #f0f0f0;
-  box-shadow: 10px 5px 5px rgb(187, 184, 184);
+  box-shadow: 10px 5px 5px rgb(153, 151, 151);
   border-radius: 8px;
   margin-bottom: 20px;
   background-size: contain;
@@ -101,7 +93,7 @@ body {
 
 .inner-container-forecast {
   border: 2px solid #f0f0f0;
-  box-shadow: 10px 5px 5px rgb(187, 184, 184);
+  box-shadow: 10px 5px 5px rgb(153, 151, 151);
   border-radius: 8px;
   padding: 5px 10px;
   margin-bottom: 8px;
@@ -131,6 +123,7 @@ ul li {
   padding: 5px;
   font-size: 1.5vh;
   align-items: center;
+  font-weight: bold;
 }
 
 li:hover {
@@ -141,7 +134,7 @@ li:hover {
 
 .inner-container-quote {
   border: 2px solid #f0f0f0;
-  box-shadow: 10px 5px 5px rgb(187, 184, 184);
+  box-shadow: 10px 5px 5px rgb(153, 151, 151);
   border-radius: 8px;
   padding: 5px;
   background-image: url("https://media3.giphy.com/media/bGNunPOXm57a1Ed5aS/giphy.gif?cid=ecf05e47r2k4nqjsrd1coo6s4og1213c48lduyebby0u96wd&ep=v1_gifs_search&rid=giphy.gif&ct=g");
@@ -170,7 +163,7 @@ li:hover {
 .search-input {
   color: rgba(39, 33, 66, 0.4);
   background: rgb(240, 252, 236);
-  box-shadow: 10px 5px 5px rgb(187, 184, 184);
+  box-shadow: 10px 5px 5px rgb(153, 151, 151);
 
   font-size: 18px;
   padding: 8px;

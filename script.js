@@ -1,13 +1,15 @@
 // Array of background images
 const backgroundImages = [
-  'url("https://i.pinimg.com/originals/9f/72/a4/9f72a4881c7f3791da3dadf12e218efb.gif")',
-  'url("https://i.pinimg.com/originals/39/d0/37/39d03736f00003372171cb7e3bdcad7e.gif")',
-  `url("https://cdn.wallpapersafari.com/71/1/BmFHIG.gif")`,
-  `url("https://i.pinimg.com/originals/bb/33/98/bb33987c254c892ba6ab782efbd36c2f.gif")`,
-  `url("https://static.wixstatic.com/media/8d5a16_86f4cc2979094100946ebcf921a5cbd6~mv2.gif")`,
-  `url("https://i.pinimg.com/originals/eb/50/87/eb50875a68b04b0480fa929af2c7547c.gif")`,
-  'url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg")',
-  // Add more image paths as needed
+  'url("https://i.pinimg.com/originals/9f/72/a4/9f72a4881c7f3791da3dadf12e218efb.gif")', //Rain
+  'url("https://i.pinimg.com/originals/44/04/dc/4404dce13bf2de288cdf1295a9f14193.gif")', //Summer
+  `url("https://i.pinimg.com/originals/95/d0/6e/95d06ee0ac5a1bbc810ae3994dc85b81.gif")`, //Fall
+  `url("https://i.pinimg.com/originals/1e/0e/4a/1e0e4ace6ce26461df6a86ac3578f902.gif")`, //Winter
+  `url("https://i.pinimg.com/originals/bb/33/98/bb33987c254c892ba6ab782efbd36c2f.gif")`, //Night
+  `url("https://i.pinimg.com/originals/80/6e/5d/806e5dd8757cff9244f4722c6819cabe.gif")`, //Sunrise
+  `url("https://i.pinimg.com/originals/d7/e7/81/d7e781b32269a8a82b500c1a9dc97733.gif")`, //clouds
+  `url("https://i.pinimg.com/originals/c1/60/bb/c160bb331501d365626751acd3bc58e3.gif")`, //sunset
+  `url("https://i.pinimg.com/originals/e6/03/a6/e603a6c8c922af61c5f447919872887a.gif")`, //Christmas
+  'url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg")', //summer
 ];
 
 let currentIndex = 0;
@@ -77,20 +79,17 @@ lastUpdated.innerHTML = `${hours}:${minutes}`;
 
 //Get input result and show temperature in celsius and fahrenheit.
 
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-input");
-  let cityElement = document.querySelector("#current-city");
-
-  cityElement.innerHTML = searchInput.value;
-
+function searchCity(city) {
   let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=metric`;
-  let h1 = axios.get(apiUrl).then(displayTemp);
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayTemp);
 }
-let searchBar = document.querySelector("#search-bar");
 
-searchBar.addEventListener("submit", search);
+function handleSearchSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-form-input");
+  searchCity(searchInput.value);
+}
 
 function displayTemp(response) {
   let temperature = Math.round(response.data.temperature.current);
@@ -101,7 +100,10 @@ function displayTemp(response) {
   let humidityElement = document.querySelector("#humidity");
   let windSpeed = document.querySelector("#wind-speed");
   let iconElement = document.querySelector("#current-icon");
+  let searchInput = document.querySelector("#search-input");
+  let cityElement = document.querySelector("#current-city");
 
+  cityElement.innerHTML = response.data.city;
   temp.innerHTML = `${temperature}°C | ${fahrenheit}°F`;
   currentCondition.innerHTML = `${condition}`;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
@@ -129,4 +131,41 @@ function ShowQuotes() {
 
 document.addEventListener("DOMContentLoaded", ShowQuotes());
 
-let forecast = document.querySelector("#forecats");
+function getForecast(city) {
+  let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+}
+
+function displayForecast() {
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `
+       <li>
+              <div class="day-of-the-week">${day} </div>
+              <div class="forecast-icons">
+                <img
+                  src="/week2/project-plus/imgs/—Pngtree—cloud icon_4468411.png"
+                  width="42"
+                />
+              </div>
+              <span class="min-max-temp"> 11ºC 2ºC </span>
+      </li>
+
+    `;
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecastHtml;
+}
+
+let searchFormElement = document.querySelector("#search-bar");
+searchFormElement.addEventListener("submit", handleSearchSubmit);
+
+searchCity("Portland");
+getForecast("Portland");
+displayForecast();
