@@ -30,18 +30,22 @@
               required
             />
             <input type="submit" value="Search" class="search-button" />
+            <button class="current-location-button" id="current-location-button">
+              <img src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/108/731/original/location.png?1703971329" class="location-icon" alt="location">
+            </button>
           </form>
+        
         </div>
       </div>
 
       <div class="column">
         <div class="inner-container-main">
-          <h2 class="city" id="current-city">Portland</h2>
+          <h2 class="city" id="current-city"></h2>
 
           <div class="weather-temperature-container">
             <div class="current-temp" id="current-temp"></div>
-            <!-- <div class="weather-app-unit">°C |</div>
-            <div class="farenheit-button"> °F </div>-->
+            <div id="centigrade" class="active">°C |</div>
+            <div id="farenheit" class="farenheit"> °F </div>
           </div>
 
 

@@ -18,9 +18,11 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 10px;
-  border: 3px solid rgb(180, 179, 177);
-  box-shadow: 10px 5px 5px rgb(0, 0, 0);
+  padding: 18px;
+  padding-top: 0;
+  padding-bottom: 5px;
+  border: none;
+  box-shadow: 15px 8px 8px rgb(0, 0, 0);
   border-radius: 8px;
   opacity: 0.78;
 }
@@ -57,6 +59,7 @@ body {
 .inner-container-main h2 {
   font-family: "Bebas Neue", sans-serif;
   margin: 0 auto;
+  padding-top: 5px;
   letter-spacing: 1px;
   font-size: 2.5rem;
   display: flex;
@@ -79,30 +82,33 @@ body {
   color: #595c23;
   font-family: "Bebas Neue", sans-serif;
 }
-
-.farenheit-button {
-  margin-top: -18px;
+.active {
+  margin-top: -10px;
   font-size: 22px;
-  font-family: "Saira Condensed";
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.farenheit {
+  margin-top: -10px;
+  font-size: 22px;
+  font-family: "Saira Condensed", Arial, Helvetica, sans-serif;
   cursor: pointer;
   padding: 5px;
   color: #595c23;
   text-decoration: underline;
 }
 
-.weather-app-unit {
-  margin-top: -15px;
-  font-size: 20px;
-  color: #595c23;
-}
-
 .inner-container-main p {
   font-family: "Saira Condensed", sans-serif;
-  font-weight: bold;
-  font-size: 1em;
+  font-size: 18px;
   margin: 0;
   padding: 0;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .inner-container-current {
@@ -113,6 +119,11 @@ body {
   margin-bottom: 20px;
   background-size: contain;
   text-align: center;
+  font-family: "Saira Condensed", sans-serif;
+}
+
+.inner-container-current:hover {
+  background: #c6c98d;
 }
 
 .inner-container-forecast {
@@ -170,10 +181,15 @@ li:hover {
   font-family: "Saira Condensed";
 }
 
+.inner-container-quote:hover {
+  background: #c6c98d;
+  border-radius: 4px;
+}
+
 .quote {
   font-family: "Saira Condensed";
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 16px;
   color: #343618;
   margin: 0;
   text-transform: uppercase;
@@ -184,6 +200,25 @@ li:hover {
   text-align: center;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: space-around;
+}
+.current-location-button {
+  margin: 5px;
+  margin-top: 0;
+  padding: 6px;
+  border: 1px solid #343618;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.location-icon {
+  width: 18px;
+  height: 18px;
+  padding: 0px;
 }
 
 .search-input {
@@ -225,12 +260,13 @@ li:hover {
 }
 
 .forecast-icons {
-  width: 3.8vw;
+  width: 75px;
+  height: 75px;
 }
 
 #changeButton {
   text-align: center;
-  margin: 10px auto;
+  margin: 8px auto;
   border-radius: 40%;
   cursor: pointer;
   font-size: 12px;
@@ -260,5 +296,26 @@ footer p a {
 
   .search-button {
     font-size: 12px;
+  }
+
+  .forecast-icons {
+    width: 45px;
+    height: 45px;
+  }
+
+  #current-city {
+    font-size: 28px;
+  }
+
+  #quote-container {
+    font-size: 14px;
+  }
+
+  #current-details {
+    font-size: 14px;
+  }
+
+  #current-time {
+    font-size: 14px;
   }
 }

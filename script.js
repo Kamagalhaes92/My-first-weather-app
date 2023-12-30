@@ -3,7 +3,7 @@ const backgroundImages = [
   'url("https://i.pinimg.com/originals/9f/72/a4/9f72a4881c7f3791da3dadf12e218efb.gif")', //Rain
   'url("https://i.pinimg.com/originals/44/04/dc/4404dce13bf2de288cdf1295a9f14193.gif")', //Summer
   `url("https://i.pinimg.com/originals/95/d0/6e/95d06ee0ac5a1bbc810ae3994dc85b81.gif")`, //Fall
-  `url("https://i.pinimg.com/originals/1e/0e/4a/1e0e4ace6ce26461df6a86ac3578f902.gif")`, //Winter
+  `url("https://i.pinimg.com/originals/0d/ba/94/0dba94affef18fa90961488c4b4b4ef0.gif")`, //Winter
   `url("https://i.pinimg.com/originals/bb/33/98/bb33987c254c892ba6ab782efbd36c2f.gif")`, //Night
   `url("https://i.pinimg.com/originals/80/6e/5d/806e5dd8757cff9244f4722c6819cabe.gif")`, //Sunrise
   `url("https://i.pinimg.com/originals/d7/e7/81/d7e781b32269a8a82b500c1a9dc97733.gif")`, //clouds
@@ -93,9 +93,14 @@ function handleSearchSubmit(event) {
 
 function displayTemp(response) {
   let temperature = Math.round(response.data.temperature.current);
-  let fahrenheit = (temperature * 9) / 5 + 32;
+  //let fahrenheit = (temperature * 9) / 5 + 32;
   let condition = response.data.condition.description;
-  let temp = document.querySelector("#current-temp");
+  {
+    let celsiusTemperature = Math.round(response.data.temperature.current);
+    let actualTempElement = document.querySelector("#current-temp");
+    actualTempElement.innerHTML = celsiusTemperature;
+  }
+  //let temp = document.querySelector("#current-temp");
   let currentCondition = document.querySelector("#current-condition");
   let humidityElement = document.querySelector("#humidity");
   let windSpeed = document.querySelector("#wind-speed");
@@ -103,15 +108,59 @@ function displayTemp(response) {
   let searchInput = document.querySelector("#search-input");
   let cityElement = document.querySelector("#current-city");
 
+  celsiusTemperature = response.data.temperature.current;
+
   getForecast(response.data.city);
 
   cityElement.innerHTML = response.data.city;
-  temp.innerHTML = `${temperature}°C | ${Math.round(fahrenheit)}°F`;
+  // temp.innerHTML = `${temperature}°C | ${Math.round(fahrenheit)}°F`;
   currentCondition.innerHTML = `${condition}`;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeed.innerHTML = `${response.data.wind.speed}km/h`;
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" width="60" alt= />`;
 }
+
+//Get current location when button is clicked
+function searchLocation(response) {
+  let apiKey = "7bcd4a1befbao09874t9af63362ba8fa";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${response.coords.longitude}&lat=${response.coords.latitude}&key=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayTemp);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let currentLocationButton = document.querySelector("#current-location-button");
+currentLocationButton.addEventListener("click", getCurrentLocation);
+
+//Get button to display Farenheit when clicked
+
+function displayFarenheitTemp(event) {
+  event.preventDefault();
+  let tempValue = document.querySelector("#current-temp");
+  if (farenheitTemp) {
+    tempValue.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+    farenheitTemp.classList.add("active");
+    celsiusTemp.classList.remove("active");
+  }
+}
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  if (celsiusTemp) {
+    celsiusNumber.innerHTML = Math.round(celsiusTemperature);
+    celsiusTemp.classList.add("active");
+    farenheitTemp.classList.remove("active");
+  }
+}
+let farenheitTemp = document.querySelector("#farenheit");
+farenheitTemp.addEventListener("click", displayFarenheitTemp);
+
+let celsiusTemp = document.querySelector("#centigrade");
+let celsiusNumber = document.querySelector("#current-temp");
+celsiusTemp.addEventListener("click", displayCelsiusTemp);
 
 //create quotes function
 
@@ -153,7 +202,7 @@ function displayForecast(response) {
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
-    if (index < 5) {
+    if (index > 0 && index < 6) {
       forecastHtml =
         forecastHtml +
         `
@@ -183,6 +232,6 @@ function displayForecast(response) {
 let searchFormElement = document.querySelector("#search-bar");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Portland");
+searchCity("Sao Paulo");
 
 displayForecast();
