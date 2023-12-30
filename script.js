@@ -161,12 +161,12 @@ function displayForecast(response) {
               <div class="day-of-the-week">${formatDay(day.time)}</div>
               <div class="forecast-icons">
                 <img
-                  src="${day.condition.icon_url}"
+                  src="${day.condition.icon_url}" class="forecast-icons"
                 />
               </div>
               <span class="max-temp"> ${Math.round(
                 day.temperature.maximum
-              )}°C </span>
+              )}° |</span>
               <span class="min-temp">  ${Math.round(
                 day.temperature.minimum
               )}°C </span>

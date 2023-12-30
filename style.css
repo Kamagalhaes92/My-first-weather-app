@@ -45,7 +45,7 @@ body {
 }
 
 .inner-container-main {
-  padding: 50px 10px;
+  padding: 60px 10px;
   padding-bottom: 20px;
   border: 2px solid #f0f0f0;
   box-shadow: 10px 5px 5px rgb(153, 151, 151);
@@ -120,6 +120,7 @@ body {
   box-shadow: 10px 5px 5px rgb(153, 151, 151);
   border-radius: 8px;
   padding: 10px;
+  padding-bottom: 0;
   margin-bottom: 8px;
 }
 
@@ -172,7 +173,7 @@ li:hover {
 .quote {
   font-family: "Saira Condensed";
   font-weight: bold;
-  font-size: 1em;
+  font-size: 1rem;
   color: #343618;
   margin: 0;
   text-transform: uppercase;
@@ -223,8 +224,8 @@ li:hover {
   width: 40%;
 }
 
-.forecast-icons img {
-  width: 4rem;
+.forecast-icons {
+  width: 3.8vw;
 }
 
 #changeButton {
@@ -245,4 +246,19 @@ footer {
 
 footer p a {
   color: orangered;
+}
+
+@media (max-width: 600px) {
+  .forecast-icons {
+    width: 45px; /* Adjust the width as needed for smaller screens */
+    /* Add other styles as needed for smaller screens */
+  }
+
+  .search-input {
+    font-size: 12px;
+  }
+
+  .search-button {
+    font-size: 12px;
+  }
 }
