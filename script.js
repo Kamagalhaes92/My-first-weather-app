@@ -9,6 +9,7 @@ const backgroundImages = [
   `url("https://i.pinimg.com/originals/d7/e7/81/d7e781b32269a8a82b500c1a9dc97733.gif")`, //clouds
   `url("https://i.pinimg.com/originals/c1/60/bb/c160bb331501d365626751acd3bc58e3.gif")`, //sunset
   `url("https://i.pinimg.com/originals/c5/cf/c9/c5cfc94d993a898f0ba3a147f3d74d40.gif")`, //Christmas
+  `url("https://i.pinimg.com/originals/42/86/96/4286968ba3c6e3f7777b801d26253d2d.gif")`, //earth
   'url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg")', //summer
 ];
 
@@ -232,6 +233,6 @@ function displayForecast(response) {
 let searchFormElement = document.querySelector("#search-bar");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
-searchCity("Sao Paulo");
+searchCity("Portland");
 
 displayForecast();
