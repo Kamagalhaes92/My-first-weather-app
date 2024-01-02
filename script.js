@@ -8,7 +8,7 @@ const backgroundImages = [
   `url("https://i.pinimg.com/originals/80/6e/5d/806e5dd8757cff9244f4722c6819cabe.gif")`, //Sunrise
   `url("https://i.pinimg.com/originals/d7/e7/81/d7e781b32269a8a82b500c1a9dc97733.gif")`, //clouds
   `url("https://i.pinimg.com/originals/c1/60/bb/c160bb331501d365626751acd3bc58e3.gif")`, //sunset
-  `url("https://steamuserimages-a.akamaihd.net/ugc/863989342441768660/30D4073ABB8281A83D71A2E8A4E1F9035FCEE8FC/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false")`,
+  `url("https://i.pinimg.com/originals/bf/2e/d4/bf2ed44164f5363cf5b29ddd7dd2c5dd.gif")`, //forest
   `url("https://i.pinimg.com/originals/c5/cf/c9/c5cfc94d993a898f0ba3a147f3d74d40.gif")`, //Christmas
   `url("https://i.pinimg.com/originals/42/86/96/4286968ba3c6e3f7777b801d26253d2d.gif")`, //earth
   'url("https://static.wixstatic.com/media/11f74e_8999eb8ba41f489aa787396cb507d05d~mv2_d_1900_1277_s_2.gif/v1/fill/w_1600,h_1075,al_c,q_90/file.jpg")', //summer
